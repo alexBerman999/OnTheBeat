@@ -62,4 +62,47 @@ public class Score {
 	}
 	
 	
+	public void format() {
+		if ((double)last.spaceLeft/timeBot/beatSize/16 > .85) {
+			last.addNote(last.spaceLeft, true);
+		}
+		
+		for (Measure ptr1 = first; ptr1 != null; ptr1 = ptr1.next) {
+			for (Note ptr2 = ptr1.first; ptr2 != null; ptr2 = ptr2.next) {
+				if (ptr2.tie) {
+					if (ptr2.next != null) {
+						if (ptr2.rest == ptr2.next.rest) {
+							switch (ptr2.type) {
+								case 'w': if (ptr2.next.type == 'h') {
+										ptr2.dot = true;
+										ptr2.tie = ptr2.next.tie;
+										ptr2.next = ptr2.next.next;
+									}
+									break;
+								case 'h': if (ptr2.next.type == 'q') {
+										ptr2.dot = true;
+										ptr2.tie = ptr2.next.tie;
+										ptr2.next = ptr2.next.next;
+									}
+									break;
+								case 'q': if (ptr2.next.type == 'e') {
+										ptr2.dot = true;
+										ptr2.tie = ptr2.next.tie;
+										ptr2.next = ptr2.next.next;
+									}
+									break;
+								case 'e': if (ptr2.next.type == 's') {
+										ptr2.dot = true;
+										ptr2.tie = ptr2.next.tie;
+										ptr2.next = ptr2.next.next;
+									}
+									break;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
 }

@@ -17,18 +17,81 @@ public class Measure {
 	}
 	
 	public void addNote (int length, boolean rest) {
-		if (last != null ) {
+		if (last != null) {
 			//if measure is not empty
-			if (length < beatSize/timeBot) {
-				last.next = new Note (rest, length/timeBot, beatSize);
-				last = last.next;
-				while (last.overflow > length/(double)(beatSize)) {
-					
-				}
-			}
+			//if length is less than 
+			last.next = new Note (rest, length/timeBot, beatSize);
+			last = last.next;
 			
+			switch (last.type) {
+				case 'w': spaceLeft =- beatSize;
+					break;
+				case 'h': spaceLeft =- beatSize/2;
+					break;
+				case 'q': spaceLeft =- beatSize/4;
+					break;
+				case 'e': spaceLeft =- beatSize/8;
+					break;
+				case 's': spaceLeft =- beatSize/16;
+					break;
+			}
+				
+			
+			while (last.overflow > length/(double)(beatSize)) {
+				last.tie = true;
+				last.next = new Note (rest, last.overflow, beatSize);
+				last = last.next;
+				
+				switch (last.type) {
+					case 'w': spaceLeft =- beatSize;
+						break;
+					case 'h': spaceLeft =- beatSize/2;
+						break;
+					case 'q': spaceLeft =- beatSize/4;
+						break;
+					case 'e': spaceLeft =- beatSize/8;
+						break;
+					case 's': spaceLeft =- beatSize/16;
+						break;
+				}
+				
+			}
 		} else {
 			//if measure is empty
+			first = new Note (rest, length/timeBot, beatSize);
+			last = first;
+			
+			switch (last.type) {
+				case 'w': spaceLeft =- beatSize;
+					break;
+				case 'h': spaceLeft =- beatSize/2;
+					break;
+				case 'q': spaceLeft =- beatSize/4;
+					break;
+				case 'e': spaceLeft =- beatSize/8;
+					break;
+				case 's': spaceLeft =- beatSize/16;
+					break;
+			}
+			
+			while (last.overflow > length/(double)(beatSize)) {
+				last.tie = true;
+				last.next = new Note (rest, last.overflow, beatSize);
+				last = last.next;
+				
+				switch (last.type) {
+					case 'w': spaceLeft =- beatSize;
+						break;
+					case 'h': spaceLeft =- beatSize/2;
+						break;
+					case 'q': spaceLeft =- beatSize/4;
+						break;
+					case 'e': spaceLeft =- beatSize/8;
+						break;
+					case 's': spaceLeft =- beatSize/16;
+						break;
+				}
+			}
 			
 		}
 	}

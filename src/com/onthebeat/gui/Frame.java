@@ -1,6 +1,7 @@
 package com.onthebeat.gui;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import com.onthebeat.input.NoteButtonListener;
 
@@ -12,12 +13,9 @@ public class Frame extends JFrame
         this.setTitle(title);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        NoteInputPanel p = new NoteInputPanel();
-        p.addKeyListener(new NoteButtonListener());
-        p.setFocusable(true);
-        p.grabFocus();
-        
-        this.add(p);
+        JPanel menu = new MainMenuPanel();
+        JPanel tempo = new TempoTapperPanel();
+        JPanel transcribe = new TranscriberPanel();
         
         this.pack();
         this.setVisible(true);

@@ -37,7 +37,7 @@ public class Measure {
 			}
 				
 			
-			while (last.overflow > length/(double)(beatSize)) {
+			while (last.overflow > length/(double)(beatSize)/16) {
 				last.tie = true;
 				last.next = new Note (rest, last.overflow, beatSize);
 				last = last.next;
@@ -74,7 +74,7 @@ public class Measure {
 					break;
 			}
 			
-			while (last.overflow > length/(double)(beatSize)) {
+			while (last.overflow > length/(double)(beatSize)/16) {
 				last.tie = true;
 				last.next = new Note (rest, last.overflow, beatSize);
 				last = last.next;

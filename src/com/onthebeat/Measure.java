@@ -9,10 +9,10 @@ public class Measure {
 	Note last;
 	Measure next = null;
 	
-	Measure (){
+	public Measure (){
 	}
 	
-	Measure (int measureMax, int beatSize, int timeBot){
+	public Measure (int measureMax, int beatSize, int timeBot){
 		this.spaceLeft = measureMax;
 		this.beatSize = beatSize;
 		this.timeBot = timeBot;
@@ -22,7 +22,6 @@ public class Measure {
 		if (last != null) {
 			//if measure is not empty
 			//if length is less than
-			System.out.println(length);
 			last.next = new Note (rest, length/timeBot, beatSize);
 			last = last.next;
 			
@@ -64,15 +63,15 @@ public class Measure {
 			last = first;
 			
 			switch (last.type) {
-				case 'w': spaceLeft -= beatSize;
+				case 'w': spaceLeft -= beatSize*timeBot;
 					break;
-				case 'h': spaceLeft -= beatSize/2;
+				case 'h': spaceLeft -= beatSize*timeBot/2;
 					break;
-				case 'q': spaceLeft -= beatSize/4;
+				case 'q': spaceLeft -= beatSize*timeBot/4;
 					break;
-				case 'e': spaceLeft -= beatSize/8;
+				case 'e': spaceLeft -= beatSize*timeBot/8;
 					break;
-				case 's': spaceLeft -= beatSize/16;
+				case 's': spaceLeft -= beatSize*timeBot/16;
 					break;
 			}
 			
@@ -82,15 +81,15 @@ public class Measure {
 				last = last.next;
 				
 				switch (last.type) {
-					case 'w': spaceLeft -= beatSize;
+					case 'w': spaceLeft -= beatSize*timeBot;
 						break;
-					case 'h': spaceLeft -= beatSize/2;
+					case 'h': spaceLeft -= beatSize*timeBot/2;
 						break;
-					case 'q': spaceLeft -= beatSize/4;
+					case 'q': spaceLeft -= beatSize*timeBot/4;
 						break;
-					case 'e': spaceLeft -= beatSize/8;
+					case 'e': spaceLeft -= beatSize*timeBot/8;
 						break;
-					case 's': spaceLeft -= beatSize/16;
+					case 's': spaceLeft -= beatSize*timeBot/16;
 						break;
 				}
 			}

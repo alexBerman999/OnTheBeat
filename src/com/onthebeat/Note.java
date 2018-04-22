@@ -9,10 +9,10 @@ public class Note {
 	boolean tie = false;
 	Note next = null;
 	
-	Note (){
+	public Note (){
 	}
 	
-	Note (boolean rest, int size, int beatSize){
+	public Note (boolean rest, int size, int beatSize){
 		this.rest = rest;
 		if (size/(double)(beatSize) > .85) {
 			type = 'w';

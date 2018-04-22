@@ -12,10 +12,10 @@ public class Score {
 	int measureMax;
 	int beatSize;
 	
-	Score (){
+	public Score (){
 	}
 	
-	Score (String name, int timeTop, int timeBot, int bpm) {
+	public Score (String name, int timeTop, int timeBot, int bpm) {
 		this.name = name;
 		this.timeTop = timeTop;
 		this.timeBot = timeBot;
@@ -45,6 +45,8 @@ public class Score {
 				last.addNote(last.spaceLeft, rest);
 				length = holder;
 				last.next = new Measure(measureMax, beatSize, timeBot);
+				if ((double)length/(beatSize*timeBot/16) > .85)
+					last.last.tie = true;
 				last = last.next;
 			} else {
 				last.addNote(length, rest);
@@ -52,12 +54,13 @@ public class Score {
 			}
 			
 			while ((double)length/(beatSize*timeBot/16) > .85) {
-				last.last.tie = true;
 				if (length > last.spaceLeft) {
 					holder = length-last.spaceLeft;
 					last.addNote(last.spaceLeft, rest);
 					length = holder;
 					last.next = new Measure(measureMax, beatSize, timeBot);
+					if ((double)length/(beatSize*timeBot/16) > .85)
+						last.last.tie = true;
 					last = last.next;
 				} else {
 					last.addNote(length, rest);

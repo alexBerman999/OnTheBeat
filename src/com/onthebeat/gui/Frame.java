@@ -12,7 +12,7 @@ public class Frame extends JFrame
 {
     String title = "On The Beat";
     JPanel cards;
-    HashMap<String, JPanel> cardMap;
+    public HashMap<String, JPanel> cardMap;
     CardLayout c;
     public Frame()
     {

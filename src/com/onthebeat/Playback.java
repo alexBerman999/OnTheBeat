@@ -14,7 +14,6 @@ public class Playback {
 		 * to expand on this example can be found in the Java documentation here:
 		 * https://docs.oracle.com/javase/7/docs/api/javax/sound/midi/Synthesizer.html
 		 */
-
 		try {
 			Synthesizer midiSynth = MidiSystem.getSynthesizer();
 			midiSynth.open();

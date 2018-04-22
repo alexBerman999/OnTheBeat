@@ -13,7 +13,7 @@ import com.onthebeat.input.TranscribeSettupActionListener;
 public class TranscribeSettupPanel extends JPanel implements Updatable
 {
     private JLabel titleLabel, timeSigLabel, tempoLabel, tapLabel;
-    private JTextField timeSigTop, timeSigBot, tempoField;
+    public JTextField timeSigTop, timeSigBot, tempoField;
     public JButton backButton, nextButton;
     private Frame f;
     private TempoListener t;

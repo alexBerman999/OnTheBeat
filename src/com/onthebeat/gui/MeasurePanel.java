@@ -46,7 +46,7 @@ public class MeasurePanel extends JPanel
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
         g2.setColor(Color.black);
-        g2.drawLine(0, 50, 400, 50);
+        g2.drawLine(0, 92, 400, 92);
         // Get notes in measure
         if(m != null)
         {

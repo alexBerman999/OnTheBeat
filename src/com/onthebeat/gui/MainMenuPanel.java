@@ -11,7 +11,7 @@ import com.onthebeat.input.MainMenuActionListener;
 public class MainMenuPanel extends JPanel
 {
     public JLabel title;
-    public JButton tempoTapButton, transcribeButton;
+    public JButton tempoTapButton, transcribeButton, reviewButton;
     public Frame f;
     public MainMenuPanel(Frame f)
     {
@@ -24,9 +24,12 @@ public class MainMenuPanel extends JPanel
         tempoTapButton.addActionListener(a);
         transcribeButton = new JButton("Transcribe");
         transcribeButton.addActionListener(a);
+        reviewButton = new JButton("Review");
+        reviewButton.addActionListener(a);
         
         this.add(title);
         this.add(tempoTapButton);
         this.add(transcribeButton);
+        this.add(reviewButton);
     }
 }

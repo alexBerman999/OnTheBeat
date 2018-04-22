@@ -26,6 +26,8 @@ public class MainMenuActionListener implements ActionListener
             f.switchPanel(Driver.TEMPO);
         else if(e.getSource() == m.transcribeButton)
             f.switchPanel(Driver.TRANSCRIBE_SETTUP);
+        else if(e.getSource() == m.reviewButton)
+            f.switchPanel(Driver.REVIEW);
     }
     
 }

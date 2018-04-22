@@ -38,7 +38,7 @@ public class MeasurePanel extends JPanel
     public void setMeasure(Measure m)
     {
         this.m = m;
-        System.out.println("Here");
+        this.repaint();
     }
     
     public void paintComponent(Graphics g)

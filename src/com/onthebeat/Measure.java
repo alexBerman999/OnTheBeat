@@ -8,7 +8,10 @@ public class Measure {
 	Note first; 
 	Note last;
 	Measure next = null;
-	 
+	
+	Measure (){
+	}
+	
 	Measure (int measureMax, int beatSize, int timeBot){
 		this.spaceLeft = measureMax;
 		this.beatSize = beatSize;

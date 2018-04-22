@@ -12,6 +12,9 @@ public class Score {
 	int measureMax;
 	int beatSize;
 	
+	Score (){
+	}
+	
 	Score (String name, int timeTop, int timeBot, int bpm) {
 		this.name = name;
 		this.timeTop = timeTop;

@@ -9,6 +9,9 @@ public class Note {
 	boolean tie = false;
 	Note next = null;
 	
+	Note (){
+	}
+	
 	Note (boolean rest, int size, int beatSize){
 		this.rest = rest;
 		if (size/(double)(beatSize) > .85) {

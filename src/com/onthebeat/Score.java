@@ -14,7 +14,7 @@ public class Score {
 	int timeBot;
 	int bpm;
 	
-	int measureMax;
+	double measureMax;
 	int beatSize;
 	
 	public Score (){
@@ -26,14 +26,14 @@ public class Score {
 		this.timeBot = timeBot;
 		this.bpm = bpm;
 		beatSize = 60000/bpm;
-		measureMax = beatSize*timeTop;
+		measureMax = timeTop/timeBot;
 	}
 	
 	public void addNote (int length, boolean rest) {
-		if ((double)length/timeBot/(beatSize/16) > .85) {
+		if ((double)length/timeBot/(beatSize/16) > .95) {
 			//if the length is greater than 85% of a 16th note
 			
-			if (last != null && last.spaceLeft < .85*((double)beatSize*timeBot/16)) {
+			if (last != null && last.spaceLeft < .0625) {
 				//if the score is not empty, but you need a new measure
 				//(if the measure has less than a sixteenth note of space left)
 				last.next = new Measure(measureMax, beatSize, timeBot);
@@ -45,26 +45,26 @@ public class Score {
 			}
 			
 			int holder;
-			if (length > last.spaceLeft) {
-				holder = length-last.spaceLeft;
-				last.addNote(last.spaceLeft, rest);
+			if (length > (int)(last.spaceLeft*timeBot*beatSize)) {
+				holder = length-(int)(last.spaceLeft*timeBot*beatSize);
+				last.addNote((int)(last.spaceLeft*timeBot*beatSize), rest);
 				length = holder;
 				last.next = new Measure(measureMax, beatSize, timeBot);
-				if ((double)length/(beatSize*timeBot/16) > .85)
+				if ((double)length/(beatSize*timeBot/16) > .95)
 					last.last.tie = true;
 				last = last.next;
 			} else {
 				last.addNote(length, rest);
 				length = 0;
 			}
-			
-			while ((double)length/(beatSize*timeBot/16) > .85) {
-				if (length > last.spaceLeft) {
-					holder = length-last.spaceLeft;
-					last.addNote(last.spaceLeft, rest);
+			System.out.println(length + "   " +(double)length/(beatSize*timeBot/16));
+			while ((double)length/(beatSize*timeBot/16) > .95) {
+				if (length > (int)(last.spaceLeft*timeBot*beatSize)) {
+					holder = length-(int)(last.spaceLeft*timeBot*beatSize);
+					last.addNote((int)(last.spaceLeft*timeBot*beatSize), rest);
 					length = holder;
 					last.next = new Measure(measureMax, beatSize, timeBot);
-					if ((double)length/(beatSize*timeBot/16) > .85)
+					if ((double)length/(beatSize*timeBot/16) > .95)
 						last.last.tie = true;
 					last = last.next;
 				} else {
@@ -76,14 +76,26 @@ public class Score {
 		}
 	}
 	
-	
+	//In very rare cases, a blank measure may spawn, I'm sorry
+	//Ze problem is those damn x's =.="
 	public void format() {
-		if ((double)last.spaceLeft/timeBot/(beatSize/16) > .85) {
-			last.addNote(last.spaceLeft, true);
+		if (last.spaceLeft > .0625 && last.spaceLeft != measureMax) {
+			last.addNote((int)(last.spaceLeft*timeBot*beatSize), true);
 		}
 		
+		
+		
 		for (Measure ptr1 = first; ptr1 != null; ptr1 = ptr1.next) {
+			Note ptrLag = null;
 			for (Note ptr2 = ptr1.first; ptr2 != null; ptr2 = ptr2.next) {
+				if (ptr2.type == 'x') {
+					if (ptrLag == null) {
+						ptr1.first = ptr1.first.next;
+					} else {
+						ptrLag.next = ptr2.next;
+					}
+				}
+				
 				if (ptr2.tie) {
 					if (ptr2.next != null) {
 						if (ptr2.rest == ptr2.next.rest) {
@@ -148,6 +160,7 @@ public class Score {
             m = m.next;
         }
         out.flush();
+        out.close();
     }
     
     public static Score read (String filename) throws FileNotFoundException {
@@ -184,6 +197,7 @@ public class Score {
             if(scan.next().equals("t"))
                 s.last.last.tie = true;
         }
+            scan.close();
             return s;
         
     }

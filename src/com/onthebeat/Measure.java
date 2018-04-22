@@ -1,7 +1,7 @@
 package com.onthebeat;
 
 public class Measure {
-	int spaceLeft;
+	double spaceLeft;
 	int beatSize;
 	int timeBot;
 
@@ -12,7 +12,7 @@ public class Measure {
 	public Measure (){
 	}
 	
-	public Measure (int measureMax, int beatSize, int timeBot){
+	public Measure (double measureMax, int beatSize, int timeBot){
 		this.spaceLeft = measureMax;
 		this.beatSize = beatSize;
 		this.timeBot = timeBot;
@@ -26,15 +26,15 @@ public class Measure {
 			last = last.next;
 			
 			switch (last.type) {
-				case 'w': spaceLeft -= beatSize*timeBot;
+				case 'w': spaceLeft -= 1;
 					break;
-				case 'h': spaceLeft -= beatSize*timeBot/2;
+				case 'h': spaceLeft -= .5;
 					break;
-				case 'q': spaceLeft -= beatSize*timeBot/4;
+				case 'q': spaceLeft -= .25;
 					break;
-				case 'e': spaceLeft -= beatSize*timeBot/8;
+				case 'e': spaceLeft -= .125;
 					break;
-				case 's': spaceLeft -= beatSize*timeBot/16;
+				case 's': spaceLeft -= .0625;
 					break;
 			}
 			
@@ -44,17 +44,18 @@ public class Measure {
 				last = last.next;
 				
 				switch (last.type) {
-					case 'w': spaceLeft -= beatSize*timeBot;
+					case 'w': spaceLeft -= 1;
 						break;
-					case 'h': spaceLeft -= beatSize*timeBot/2;
+					case 'h': spaceLeft -= .5;
 						break;
-					case 'q': spaceLeft -= beatSize*timeBot/4;
+					case 'q': spaceLeft -= .25;
 						break;
-					case 'e': spaceLeft -= beatSize*timeBot/8;
+					case 'e': spaceLeft -= .125;
 						break;
-					case 's': spaceLeft -= beatSize*timeBot/16;
+					case 's': spaceLeft -= .0625;
 						break;
 				}
+			
 				
 			}
 		} else {
@@ -63,17 +64,18 @@ public class Measure {
 			last = first;
 			
 			switch (last.type) {
-				case 'w': spaceLeft -= beatSize*timeBot;
+				case 'w': spaceLeft -= 1;
 					break;
-				case 'h': spaceLeft -= beatSize*timeBot/2;
+				case 'h': spaceLeft -= .5;
 					break;
-				case 'q': spaceLeft -= beatSize*timeBot/4;
+				case 'q': spaceLeft -= .25;
 					break;
-				case 'e': spaceLeft -= beatSize*timeBot/8;
+				case 'e': spaceLeft -= .125;
 					break;
-				case 's': spaceLeft -= beatSize*timeBot/16;
+				case 's': spaceLeft -= .0625;
 					break;
 			}
+		
 			
 			while (last.overflow > .85*(double)(beatSize)/16) {
 				last.tie = true;
@@ -81,17 +83,18 @@ public class Measure {
 				last = last.next;
 				
 				switch (last.type) {
-					case 'w': spaceLeft -= beatSize*timeBot;
+					case 'w': spaceLeft -= 1;
 						break;
-					case 'h': spaceLeft -= beatSize*timeBot/2;
+					case 'h': spaceLeft -= .5;
 						break;
-					case 'q': spaceLeft -= beatSize*timeBot/4;
+					case 'q': spaceLeft -= .25;
 						break;
-					case 'e': spaceLeft -= beatSize*timeBot/8;
+					case 'e': spaceLeft -= .125;
 						break;
-					case 's': spaceLeft -= beatSize*timeBot/16;
+					case 's': spaceLeft -= .0625;
 						break;
 				}
+			
 			}
 			
 		}

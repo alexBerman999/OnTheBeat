@@ -29,7 +29,8 @@ public class Playback {
 				while (n != null) {
 					int h = randFreq();
 					if (!n.rest)
-						mChannels[0].noteOn(h, 100);// On channel 0, play note number 60 with velocity 100
+					    System.out.println(h);
+						mChannels[0].noteOn(h, 100);
 					try {
 						int waitDuration = m.beatSize * m.timeBot;
 						switch (n.type) {

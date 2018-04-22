@@ -11,10 +11,13 @@ public class TranscriberPanel extends JPanel
 {
     private Score s;
     private TranscriberKeyListener k;
+    private MeasurePanel mp;
     public TranscriberPanel()
     {
         this.setPreferredSize(new Dimension(800, 200));
-        k = new TranscriberKeyListener(s);
+        k = new TranscriberKeyListener(s, mp);
+        mp = new MeasurePanel();
+        this.add(mp);
         this.addKeyListener(k);
     }
     

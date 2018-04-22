@@ -5,9 +5,9 @@ public class Measure {
 	int beatSize;
 	int timeBot;
 
-	Note first; 
-	Note last;
-	Measure next = null;
+	public Note first; 
+	public Note last;
+	public Measure next = null;
 	
 	public Measure (){
 	}

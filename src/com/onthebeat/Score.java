@@ -1,8 +1,13 @@
 package com.onthebeat;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.Scanner;
+
 public class Score {
-	Measure first = null;
-	Measure last = null;
+    public Measure first = null;
+	public Measure last = null;
 
 	String name;
 	int timeTop;
@@ -114,5 +119,73 @@ public class Score {
 			}
 		}
 	}
+	
+	public void saveAs(String fileName) throws FileNotFoundException {
+        File f = new File("scores/" + fileName + ".otb");
+        System.out.println(f.getAbsolutePath());
+        PrintWriter out = new PrintWriter(f);
+        out.print(timeTop + " " + timeBot + " " + bpm + " ");
+        
+        Measure m = first;
+        while (m != null) {
+            Note n = m.first;
+            while (n != null) {
+                out.print(n.type +" ");
+                if (n.dot)
+                    out.print("d ");
+                else
+                    out.print("n ");
+                if (n.rest)
+                    out.print("r ");
+                else
+                    out.print("n ");
+                if (n.tie)
+                    out.print("t ");
+                else
+                    out.print("n ");
+                n = n.next;
+            }
+            m = m.next;
+        }
+        out.flush();
+    }
+    
+    public static Score read (String filename) throws FileNotFoundException {
+        File f = new File ("scores/" + filename);
+        Scanner scan = new Scanner (f);
+        int top = scan.nextInt();
+        int bot = scan.nextInt();
+        int bpm = scan.nextInt();
+        Score s = new Score (filename, top, bot, bpm);
+        int noteLength = s.beatSize * bot;
+        while (scan.hasNext()) {
+            String notetype = scan.next();
+            switch (notetype) {
+            case "w":
+                s.addNote(noteLength, false);
+                break;
+            case "h":
+                s.addNote(noteLength / 2, false);
+                break;
+            case "q":
+                s.addNote(noteLength / 4, false);
+                break;
+            case "e":
+                s.addNote(noteLength / 8, false);
+                break;
+            case "s":
+                s.addNote(noteLength / 16, false);
+                break;
+            }
+            if(scan.next().equals("d"))
+                s.last.last.dot = true;
+            if(scan.next().equals("r"))
+                s.last.last.rest = true;
+            if(scan.next().equals("t"))
+                s.last.last.tie = true;
+        }
+            return s;
+        
+    }
 	
 }

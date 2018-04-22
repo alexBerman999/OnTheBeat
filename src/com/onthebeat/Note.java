@@ -1,13 +1,13 @@
 package com.onthebeat;
 
 public class Note {
-	char type = 'x';
-	boolean dot;
-	boolean rest;
+	public char type = 'x';
+	public boolean dot;
+	public boolean rest;
 	int overflow = 0;
 	
-	boolean tie = false;
-	Note next = null;
+	public boolean tie = false;
+	public Note next = null;
 	
 	public Note (){
 	}

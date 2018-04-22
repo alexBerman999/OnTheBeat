@@ -3,6 +3,7 @@ package com.onthebeat.gui;
 import java.awt.CardLayout;
 import java.util.HashMap;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -18,6 +19,7 @@ public class Frame extends JFrame
     {
         this.setTitle(title);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setIconImage(new ImageIcon("assets/dolphin_16.png").getImage());
         
         cardMap = new HashMap<String, JPanel>();
         JPanel menu = new MainMenuPanel(this);

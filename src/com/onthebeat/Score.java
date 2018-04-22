@@ -95,6 +95,11 @@ public class Score {
 					}
 				}
 				ptrLag = ptr2;
+				if (ptr2.rest) {
+					if (ptr2.tie) {
+						ptr2.tie = false;
+					}
+				}
 				if (ptr2.tie) {
 					if (ptr2.next != null) {
 						if (ptr2.rest == ptr2.next.rest) {

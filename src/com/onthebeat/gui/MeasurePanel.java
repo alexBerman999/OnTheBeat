@@ -38,10 +38,12 @@ public class MeasurePanel extends JPanel
     public void setMeasure(Measure m)
     {
         this.m = m;
+        System.out.println("Here");
     }
     
     public void paintComponent(Graphics g)
     {
+        super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
         g2.setColor(Color.black);
         g2.drawLine(0, 50, 400, 50);
@@ -55,47 +57,51 @@ public class MeasurePanel extends JPanel
                 notes++;
                 n = n.next;
             }
-            int increment = 400 / notes;
-            int xVal = 0;
-            n = m.first;
-            while(n != null)
+            if(notes > 0)
             {
-                Image img = null;
-                switch (n.type)
+                int increment = 400 / notes;
+                int xVal = 0;
+                n = m.first;
+                while(n != null)
                 {
-                    case 'w':
-                        if(n.rest)
-                            img = whole_rest;
-                        else
-                            img = whole_note;
-                        break;
-                    case 'h':
-                        if(n.rest)
-                            img = half_rest;
-                        else
-                            img = half_note;
-                        break;
-                    case 'q':
-                        if(n.rest)
-                            img = quarter_rest;
-                        else
-                            img = quarter_note;
-                        break;
-                    case 'e':
-                        if(n.rest)
-                            img = eigth_rest;
-                        else
-                            img = eigth_note;
-                        break;
-                    case 's':
-                        if(n.rest)
-                            img = sixteenth_rest;
-                        else
-                            img = sixteenth_note;
-                        break;
+                    Image img = null;
+                    switch (n.type)
+                    {
+                        case 'w':
+                            if(n.rest)
+                                img = whole_rest;
+                            else
+                                img = whole_note;
+                            break;
+                        case 'h':
+                            if(n.rest)
+                                img = half_rest;
+                            else
+                                img = half_note;
+                            break;
+                        case 'q':
+                            if(n.rest)
+                                img = quarter_rest;
+                            else
+                                img = quarter_note;
+                            break;
+                        case 'e':
+                            if(n.rest)
+                                img = eigth_rest;
+                            else
+                                img = eigth_note;
+                            break;
+                        case 's':
+                            if(n.rest)
+                                img = sixteenth_rest;
+                            else
+                                img = sixteenth_note;
+                            break;
+                    }
+                    g2.drawImage(img, xVal, 50, 25, 50, this);
+                    xVal += increment;
+                    n = n.next;
                 }
-                g2.drawImage(img, xVal, 50, this);
-                xVal += increment;
             }
         }
     }

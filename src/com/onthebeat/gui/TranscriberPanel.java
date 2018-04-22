@@ -15,8 +15,8 @@ public class TranscriberPanel extends JPanel
     public TranscriberPanel()
     {
         this.setPreferredSize(new Dimension(800, 200));
-        k = new TranscriberKeyListener(s, mp);
         mp = new MeasurePanel();
+        k = new TranscriberKeyListener(s, mp);
         this.add(mp);
         this.addKeyListener(k);
     }

@@ -37,6 +37,7 @@ public class TranscriberKeyListener extends KeyAdapter
                 int length = (int)(System.currentTimeMillis() - lastTime);
                 s.addNote(length, false);
                 mp.setMeasure(s.last);
+                mp.repaint();
                 lastTime = System.currentTimeMillis();
             }
         }

@@ -1,27 +1,34 @@
 package com.onthebeat.gui;
 
 import java.awt.Dimension;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class TempoTapperPanel extends JPanel
+import com.onthebeat.input.TempoListener;
+import com.onthebeat.input.TempoTapperActionListener;
+
+public class TempoTapperPanel extends JPanel implements Updatable
 {
     private JLabel tempoTap;
-    private JButton tempoButton, backButton;
+    public JButton backButton;
     private TempoListener t;
+    private Frame f;
     
-    public TempoTapperPanel()
+    public TempoTapperPanel(Frame f)
     {
+        this.f = f;
         this.setPreferredSize(new Dimension(400, 400));
         t = new TempoListener(this);
+        TempoTapperActionListener a = new TempoTapperActionListener(f, this);
         
         tempoTap = new JLabel();
+        backButton = new JButton("Back");
+        backButton.addActionListener(a);
         
         this.add(tempoTap);
+        this.add(backButton);
         this.addKeyListener(t);
         update();
     }
@@ -33,40 +40,5 @@ public class TempoTapperPanel extends JPanel
             tempoTap.setText("Hit Space for Tempo");
         else
             tempoTap.setText(tempo+"");
-    }
-}
-
-class TempoListener extends KeyAdapter
-{
-    private int tempo;
-    private long lastTime;
-    private TempoTapperPanel tPanel;
-    public TempoListener(TempoTapperPanel tPanel)
-    {
-        tempo = -1;
-        lastTime = -1;
-        this.tPanel = tPanel;
-    }
-    
-    public int getTempo()
-    {
-        return tempo;
-    }
-    
-    public void keyPressed(KeyEvent e)
-    {
-        if(e.getKeyCode() == KeyEvent.VK_SPACE)
-        {
-            if(lastTime == -1)
-                lastTime = System.currentTimeMillis();
-            else
-            {
-                int time = (int)(System.currentTimeMillis() - lastTime);
-                System.out.println(time);
-                tempo = 60000/time;
-                lastTime = -1;
-            }
-        }
-        tPanel.update();
     }
 }

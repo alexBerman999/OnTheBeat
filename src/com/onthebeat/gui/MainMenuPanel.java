@@ -6,17 +6,24 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.onthebeat.input.MainMenuActionListener;
+
 public class MainMenuPanel extends JPanel
 {
-    JLabel title;
-    JButton tempoTapButton, transcribeButton;
-    public MainMenuPanel()
+    public JLabel title;
+    public JButton tempoTapButton, transcribeButton;
+    public Frame f;
+    public MainMenuPanel(Frame f)
     {
+        this.f = f;
+        MainMenuActionListener a = new MainMenuActionListener(f, this);
         this.setPreferredSize(new Dimension(400, 400));
         
         title = new JLabel("On The Beat");
         tempoTapButton = new JButton("Tempo Tapper");
+        tempoTapButton.addActionListener(a);
         transcribeButton = new JButton("Transcribe");
+        transcribeButton.addActionListener(a);
         
         this.add(title);
         this.add(tempoTapButton);

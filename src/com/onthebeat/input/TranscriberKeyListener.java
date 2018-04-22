@@ -43,11 +43,11 @@ public class TranscriberKeyListener extends KeyAdapter
         }
         else if(e.getKeyCode() == KeyEvent.VK_P)
         {
-            Playback.play(s);
+            Playback.play(s, Playback.Scale.Blues);
         }
         else if(e.getKeyCode() == KeyEvent.VK_G)
         {
-            Playback.play(s);
+            Playback.play(s, Playback.Scale.Blues);
         }
         else if(e.getKeyCode() == KeyEvent.VK_S)
         {
@@ -69,8 +69,7 @@ public class TranscriberKeyListener extends KeyAdapter
             try
             {
                 Score s = Score.read(fileName);
-                Playback.play(s);
-                
+                Playback.play(s, Playback.Scale.Blues);
             }
             catch(FileNotFoundException e1)
             {

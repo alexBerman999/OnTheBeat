@@ -132,6 +132,7 @@ public class Score {
 	}
 	
 	public void saveAs(String fileName) throws FileNotFoundException {
+	    format();
         File f = new File("scores/" + fileName + ".otb");
         System.out.println(f.getAbsolutePath());
         PrintWriter out = new PrintWriter(f);

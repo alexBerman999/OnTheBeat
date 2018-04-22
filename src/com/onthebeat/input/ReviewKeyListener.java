@@ -23,7 +23,7 @@ public class ReviewKeyListener extends KeyAdapter
     {
         if(e.getKeyCode() == KeyEvent.VK_P)
         {
-            Playback.play(s);
+            Playback.play(s, Playback.Scale.Blues);
         }
         else if(e.getKeyCode() == KeyEvent.VK_LEFT)
         {

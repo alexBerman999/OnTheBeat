@@ -27,8 +27,9 @@ public class Playback {
 			while (m != null) {
 				Note n = m.first;
 				while (n != null) {
+					int h = randFreq();
 					if (!n.rest)
-						mChannels[0].noteOn(60, 100);// On channel 0, play note number 60 with velocity 100
+						mChannels[0].noteOn(h, 100);// On channel 0, play note number 60 with velocity 100
 					try {
 						int waitDuration = m.beatSize * m.timeBot;
 						switch (n.type) {
@@ -48,7 +49,7 @@ public class Playback {
 						Thread.sleep(waitDuration); // wait time in milliseconds to control duration
 					} catch (InterruptedException e) {
 					}
-					mChannels[0].noteOff(60);// turn of the note
+					mChannels[0].noteOff(h);// turn of the note
 					n = n.next;
 				}
 				m = m.next;
@@ -59,5 +60,20 @@ public class Playback {
 			e1.printStackTrace();
 		}
 
+	}
+	
+	public static int randFreq() {
+		switch ((int)(5*Math.random() + 1)){
+			case 1:
+				return 72;
+			case 2:
+				return 74;
+			case 3:
+				return 76;
+			case 4:
+				return 79;
+			default:
+				return 81;
+		}
 	}
 }

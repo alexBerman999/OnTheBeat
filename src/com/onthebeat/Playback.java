@@ -1,5 +1,7 @@
 package com.onthebeat;
 
+import java.util.Random;
+
 import javax.sound.midi.Instrument;
 import javax.sound.midi.MidiChannel;
 import javax.sound.midi.MidiSystem;
@@ -7,8 +9,16 @@ import javax.sound.midi.MidiUnavailableException;
 import javax.sound.midi.Synthesizer;
 
 public class Playback {
+	static Random generator = new Random();
 
-	public static void play(Score s) {
+	enum Scale
+	{
+		CPentatonic, Blues;
+	}
+	
+	static int[] pent = {72, 74, 76, 79, 81, 84}, blues = {72, 75, 77, 78, 79, 82, 84};
+
+	public static void play(Score s, Scale g) {
 		/*
 		 * Create a new Sythesizer and open it. Most of the methods you will want to use
 		 * to expand on this example can be found in the Java documentation here:
@@ -27,7 +37,7 @@ public class Playback {
 			while (m != null) {
 				Note n = m.first;
 				while (n != null) {
-					int h = randFreq();
+					int h = randFreq(g);
 					if (!n.rest)
 					    System.out.println(h);
 						mChannels[0].noteOn(h, 100);
@@ -63,18 +73,13 @@ public class Playback {
 
 	}
 	
-	public static int randFreq() {
-		switch ((int)(5*Math.random() + 1)){
-			case 1:
-				return 72;
-			case 2:
-				return 74;
-			case 3:
-				return 76;
-			case 4:
-				return 79;
-			default:
-				return 81;
-		}
+	public static int randFreq(Scale g) {
+		int[] scale = null;
+		if (g == Scale.CPentatonic)
+			scale = pent;
+		else if(g == Scale.Blues)
+			scale = blues;
+		int randomIndex = generator.nextInt(scale.length);
+		return scale[randomIndex];
 	}
 }

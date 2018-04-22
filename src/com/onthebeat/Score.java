@@ -22,10 +22,10 @@ public class Score {
 	}
 	
 	public void addNote (int length, boolean rest) {
-		if ((double)length/timeBot/beatSize/16 > .85) {
+		if ((double)length/timeBot/(beatSize/16) > .85) {
 			//if the length is greater than 85% of a 16th note
 			
-			if (last != null && last.spaceLeft < (double)length/timeBot/beatSize ) {
+			if (last != null && last.spaceLeft < .85*((double)beatSize*timeBot/16)) {
 				//if the score is not empty, but you need a new measure
 				//(if the measure has less than a sixteenth note of space left)
 				last.next = new Measure(measureMax, beatSize, timeBot);
@@ -41,17 +41,21 @@ public class Score {
 				holder = length-last.spaceLeft;
 				last.addNote(last.spaceLeft, rest);
 				length = holder;
+				last.next = new Measure(measureMax, beatSize, timeBot);
+				last = last.next;
 			} else {
 				last.addNote(length, rest);
 				length = 0;
 			}
 			
-			while ((double)length/timeBot/beatSize/16 > .85) {
+			while ((double)length/(beatSize*timeBot/16) > .85) {
 				last.last.tie = true;
 				if (length > last.spaceLeft) {
 					holder = length-last.spaceLeft;
 					last.addNote(last.spaceLeft, rest);
 					length = holder;
+					last.next = new Measure(measureMax, beatSize, timeBot);
+					last = last.next;
 				} else {
 					last.addNote(length, rest);
 					length = 0;
@@ -63,7 +67,7 @@ public class Score {
 	
 	
 	public void format() {
-		if ((double)last.spaceLeft/timeBot/beatSize/16 > .85) {
+		if ((double)last.spaceLeft/timeBot/(beatSize/16) > .85) {
 			last.addNote(last.spaceLeft, true);
 		}
 		

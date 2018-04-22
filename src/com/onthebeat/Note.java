@@ -13,19 +13,19 @@ public class Note {
 		this.rest = rest;
 		if (size/(double)(beatSize) > .85) {
 			type = 'w';
-			overflow = beatSize - size;
+			overflow = size - beatSize;
 		} else if (size/((double)beatSize/2) > .85) {
 			type = 'h';
-			overflow = beatSize/2 - size;
+			overflow = size - beatSize/2;
 		} else if (size/((double)beatSize/4) > .85) {
 			type = 'q';
-			overflow = beatSize/4 - size;
+			overflow = size - beatSize/4;
 		} else if (size/((double)beatSize/8) > .85) {
 			type = 'e';
-			overflow = beatSize/8 - size;
+			overflow = size - beatSize/8;
 		} else if (size/((double)beatSize/16) > .85) {
 			type = 's';
-			overflow = beatSize/16 - size;
+			overflow = size - beatSize/16;
 		}
 	}
 }

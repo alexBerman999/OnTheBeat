@@ -57,7 +57,6 @@ public class Score {
 				last.addNote(length, rest);
 				length = 0;
 			}
-			System.out.println(length + "   " +(double)length/(beatSize*timeBot/16));
 			while ((double)length/(beatSize*timeBot/16) > .95) {
 				if (length > (int)(last.spaceLeft*timeBot*beatSize)) {
 					holder = length-(int)(last.spaceLeft*timeBot*beatSize);
@@ -95,7 +94,7 @@ public class Score {
 						ptrLag.next = ptr2.next;
 					}
 				}
-				
+				ptrLag = ptr2;
 				if (ptr2.tie) {
 					if (ptr2.next != null) {
 						if (ptr2.rest == ptr2.next.rest) {

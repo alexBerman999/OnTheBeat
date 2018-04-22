@@ -13,7 +13,6 @@ public class Note {
 	}
 	
 	public Note (boolean rest, int size, int beatSize){
-		System.out.println(size*4);
 		this.rest = rest;
 		if (size/(double)(beatSize) > .95) {
 			type = 'w';

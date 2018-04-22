@@ -43,9 +43,9 @@ public class TranscriberKeyListener extends KeyAdapter
         }
         else if(e.getKeyCode() == KeyEvent.VK_P)
         {
-            Playback.play(s, Playback.Scale.Blues);
+            Playback.play(s, Playback.Scale.CPentatonic);
         }
-        else if(e.getKeyCode() == KeyEvent.VK_G)
+        if(e.getKeyCode() == KeyEvent.VK_B)
         {
             Playback.play(s, Playback.Scale.Blues);
         }

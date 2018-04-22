@@ -16,7 +16,7 @@ import com.onthebeat.Note;
 public class MeasurePanel extends JPanel
 {
     Image whole_note, whole_rest, half_note, half_rest, quarter_note, quarter_rest, eigth_note, eigth_rest,
-            sixteenth_note, sixteenth_rest;
+            sixteenth_note, sixteenth_rest, dot;
     Measure m;
     
     public MeasurePanel()
@@ -31,6 +31,7 @@ public class MeasurePanel extends JPanel
         eigth_rest = new ImageIcon("assets/eigth_rest.png").getImage();
         sixteenth_note = new ImageIcon("assets/sixteenth_note.png").getImage();
         sixteenth_rest = new ImageIcon("assets/sixteenth_rest.png").getImage();
+        dot = new ImageIcon("assets/dot.png").getImage();
         
         this.setPreferredSize(new Dimension(400, 100));
     }
@@ -99,6 +100,11 @@ public class MeasurePanel extends JPanel
                             break;
                     }
                     g2.drawImage(img, xVal, 50, 25, 50, this);
+                    if(n.dot)
+                    {
+                        g2.drawImage(dot, xVal + (increment/3), 40, 25, 50, this);
+                        System.out.println("Here");
+                    }
                     xVal += increment;
                     n = n.next;
                 }
